@@ -3,6 +3,9 @@ Serial port;
 float sliderValue = 0;
 int button1Pressed = 0;
 int button2Pressed = 0;
+int button3Pressed = 0;
+int button4Pressed = 0;
+int button5Pressed = 0;
 
 int screenSize = 800;
 
@@ -68,17 +71,51 @@ void draw()
   
   
   //draw buttons
-  fill(button1Pressed,0,0);
+  if(button1Pressed == 1) {
+    fill(0,0,0);
+  }
+  else{
+    fill(255,255,255);
+  }
   circle(button1X, button1Y, buttonRadius);
-  fill(0,button2Pressed,0);
+  if(button2Pressed == 1) {
+    fill(button2Pressed,0,0);
+    //TODO: change border color insted of button
+  }
+  else{
+    fill(255,255,255);
+  }
   circle(button2X, button2Y, buttonRadius);
+  if(button3Pressed == 1) {
+    fill(button3Pressed,0,0);
+    //TODO: set color to grey
+  }
+  else{
+    fill(255,255,255);
+  }
   circle(button3X, button3Y, buttonRadius);
+  if(button4Pressed == 1) {
+    fill(button4Pressed,0,0);
+  }
+  else{
+    fill(255,255,255);
+  }
   circle(button4X, button4Y, buttonRadius);
+  if(button5Pressed == 1) {
+    fill(button5Pressed,0,0);
+    //TODOL change border coor insted of button
+  }
+  else{
+    fill(255,255,255);
+  }
   circle(button5X, button5Y, buttonRadius);
   
   //TODO: finish the fill 
   // probably will require IFs
  
+  //TODO: add light sesnsor
+  // that changes the background color/ shade of gray
+  
   
   //debug here
   
@@ -93,9 +130,12 @@ void serialEvent(Serial serial) {
   // store all the information form the serial message
   float[] data = float(split(inString, ","));
 
-  if (data.length >=3) {
+  if (data.length >=6) {
     sliderValue = map(data[0], 0, 1023, 0, slideRange);
     button1Pressed = int(map(data[1], 0, 1, 0, 255));
     button2Pressed = int(map(data[2], 0, 1, 0, 255));
+    button3Pressed = int(map(data[1], 0, 1, 0, 255));
+    button4Pressed = int(map(data[2], 0, 1, 0, 255));
+    button5Pressed = int(map(data[1], 0, 1, 0, 255));
   }
 }
